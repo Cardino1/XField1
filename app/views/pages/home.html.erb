@@ -1,0 +1,120 @@
+<section class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">Discover today's top tech stories & opportunities</p>
+    <h1 class="hero-title">A curated radar for founders, operators, investors, and researchers.</h1>
+    <p class="hero-subtitle">XField surfaces the latest breakthroughs, startup opportunities, and calls for collaboration across the tech ecosystem—daily.</p>
+
+    <div class="tab-bar">
+      <%= link_to "Explore", root_path, class: "tab active" %>
+      <%= link_to "Opportunities", opportunities_path, class: "tab" %>
+      <%= link_to "Investors", investors_path, class: "tab" %>
+      <%= link_to "News", articles_path, class: "tab" %>
+    </div>
+
+    <div class="hero-grid">
+      <% if @highlighted_opportunities.any? %>
+        <% @highlighted_opportunities.each do |opportunity| %>
+          <div class="hero-card">
+            <div>
+              <span class="badge"><%= opportunity.category %></span>
+              <h3 class="title"><%= opportunity.title %></h3>
+              <p class="leading-relaxed"><%= truncate(opportunity.description, length: 120) %></p>
+            </div>
+            <p class="meta">Submitted by <%= opportunity.full_name %> · <%= opportunity.organization %></p>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="card">
+          <p class="card-title">No opportunities yet</p>
+          <p class="card-description">Submit your first opportunity to inspire the community.</p>
+          <%= link_to "Submit opportunity", new_opportunity_path, class: "card-link" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="mt-12">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Latest News</h2>
+      <p class="section-subtitle">Original analysis from our editorial desk.</p>
+    </div>
+    <div class="opportunity-grid">
+      <% if @latest_articles.any? %>
+        <% @latest_articles.each do |article| %>
+          <div class="card">
+            <p class="card-eyebrow"><%= formatted_datetime(article.published_at) || "Draft" %></p>
+            <h3 class="card-title"><%= link_to article.title, article_path(article) %></h3>
+            <p class="card-description"><%= article.excerpt.presence || truncate(strip_tags(article.body), length: 160) %></p>
+            <p class="card-meta">By <%= article.author.presence || "XField Team" %></p>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="text-gray-600">Our editorial team is preparing the first edition. Stay tuned!</p>
+      <% end %>
+    </div>
+    <div class="mt-6">
+      <%= link_to "Browse all articles", articles_path, class: "card-link" %>
+    </div>
+  </div>
+</section>
+
+<section class="mt-12">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Featured Investors</h2>
+      <p class="section-subtitle">Partner VCs collaborating with XField.</p>
+    </div>
+    <div class="opportunity-grid">
+      <% if @investors.any? %>
+        <% @investors.each do |investor| %>
+          <div class="investor-card">
+            <div class="flex items-center space-x-3">
+              <span class="badge"><%= investor.firm_name.first(1) %></span>
+              <div>
+                <h3 class="card-title"><%= investor.firm_name %></h3>
+                <p class="text-sm text-gray-600">Contact: <%= investor.contact_name %></p>
+              </div>
+            </div>
+            <p class="card-description"><%= truncate(investor.values, length: 120) %></p>
+            <div class="chip-group">
+              <span class="tag badge-muted"><%= investor.investment_focus %></span>
+              <% if investor.website.present? %>
+                <%= link_to "Website", investor.website, class: "tag", target: "_blank", rel: "noopener" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="text-gray-600">We're onboarding investor partners. Submit your firm to appear here.</p>
+      <% end %>
+    </div>
+    <div class="mt-6">
+      <%= link_to "Show all investors", investors_path, class: "card-link" %>
+    </div>
+  </div>
+</section>
+
+<section class="mt-12">
+  <div class="container">
+    <div class="card shadow-soft">
+      <h2 class="section-title">Share an opportunity</h2>
+      <p class="section-subtitle">Jobs, research collaborations, open-source maintainers, or co-founder searches—submit your opportunity for the community.</p>
+      <%= link_to "Submit an opportunity", new_opportunity_path, class: "btn-primary" %>
+    </div>
+  </div>
+</section>
+
+<section class="mt-12">
+  <div class="container">
+    <div class="card">
+      <h2 class="section-title">Get weekly updates</h2>
+      <p class="section-subtitle">Receive curated briefings on the latest breakthroughs, venture deals, and opportunities.</p>
+      <%= form_with model: @subscription, url: subscriptions_path, class: "flex items-center space-x-3" do |form| %>
+        <%= form.email_field :email, placeholder: "you@example.com", class: "form-control" %>
+        <%= form.submit "Subscribe", class: "btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</section>

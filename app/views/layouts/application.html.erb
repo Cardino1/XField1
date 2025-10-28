@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>XField</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body class="font-sans bg-white text-gray-900">
+    <header class="border-b border-gray-200">
+      <div class="container">
+        <div class="flex items-center justify-between py-6">
+          <%= link_to root_path, class: "flex items-center space-x-3" do %>
+            <span class="inline-flex items-center justify-center w-10 h-10 bg-black text-white rounded-full text-lg font-bold">XF</span>
+            <span class="text-xl font-semibold">XField</span>
+          <% end %>
+          <nav class="nav-links">
+            <%= nav_link_to "Explore", root_path %>
+            <%= nav_link_to "Opportunities", opportunities_path %>
+            <%= nav_link_to "Investors", investors_path %>
+            <%= nav_link_to "News", articles_path %>
+          </nav>
+          <%= link_to "Get Updates", new_subscription_path, class: "btn-primary" %>
+        </div>
+      </div>
+    </header>
+
+    <% if notice %>
+      <div class="bg-emerald-50 text-emerald-800 text-center py-3">
+        <%= notice %>
+      </div>
+    <% end %>
+
+    <% if alert %>
+      <div class="bg-rose-50 text-rose-800 text-center py-3">
+        <%= alert %>
+      </div>
+    <% end %>
+
+    <main class="min-h-screen">
+      <%= yield %>
+    </main>
+
+    <footer class="border-t border-gray-200 mt-12 py-8">
+      <div class="container flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+        <div>
+          <p class="font-semibold">XField</p>
+          <p class="text-sm text-gray-600">Discover top tech stories and opportunities worldwide.</p>
+        </div>
+        <div class="text-sm text-gray-500">© <%= Time.current.year %> XField. All rights reserved.</div>
+      </div>
+    </footer>
+  </body>
+</html>

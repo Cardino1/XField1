@@ -1,0 +1,31 @@
+<div class="flex justify-between items-center">
+  <div>
+    <h1 class="section-title">Articles</h1>
+    <p class="section-subtitle">Manage newsroom content.</p>
+  </div>
+  <%= link_to "New article", new_admin_article_path, class: "btn-primary" %>
+</div>
+
+<table class="table mt-8">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Published</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= link_to article.title, admin_article_path(article) %></td>
+        <td><span class="status-badge <%= article.status %>"><%= article.status.humanize %></span></td>
+        <td><%= formatted_datetime(article.published_at) %></td>
+        <td class="actions">
+          <%= link_to "Edit", edit_admin_article_path(article) %>
+          <%= link_to "Delete", admin_article_path(article), data: { turbo_method: :delete, turbo_confirm: "Delete this article?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

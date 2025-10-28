@@ -1,0 +1,35 @@
+<%= form_with model: [:admin, @article] do |form| %>
+  <%= render "shared/form_errors", object: @article %>
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div class="form-group">
+    <%= form.label :author %>
+    <%= form.text_field :author %>
+  </div>
+  <div class="form-group">
+    <%= form.label :excerpt %>
+    <%= form.text_area :excerpt %>
+  </div>
+  <div class="form-group">
+    <%= form.label :cover_image_url %>
+    <%= form.url_field :cover_image_url %>
+  </div>
+  <div class="form-group">
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </div>
+  <div class="form-group">
+    <%= form.label :published_at %>
+    <%= form.datetime_select :published_at, include_blank: true %>
+  </div>
+  <div class="form-group">
+    <%= form.label :status %>
+    <%= form.select :status, Article.statuses.keys.map { |status| [status.humanize, status] } %>
+  </div>
+  <div class="form-actions">
+    <%= link_to "Cancel", admin_articles_path, class: "btn-secondary" %>
+    <%= form.submit class: "btn-primary" %>
+  </div>
+<% end %>

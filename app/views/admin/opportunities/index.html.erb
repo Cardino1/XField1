@@ -1,0 +1,33 @@
+<div class="flex justify-between items-center">
+  <div>
+    <h1 class="section-title">Opportunities</h1>
+    <p class="section-subtitle">Approve and manage submissions.</p>
+  </div>
+  <%= link_to "New opportunity", new_admin_opportunity_path, class: "btn-primary" %>
+</div>
+
+<table class="table mt-8">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Status</th>
+      <th>Submitted</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @opportunities.each do |opportunity| %>
+      <tr>
+        <td><%= link_to opportunity.title, admin_opportunity_path(opportunity) %></td>
+        <td><%= opportunity.category %></td>
+        <td><span class="status-badge <%= opportunity.status %>"><%= opportunity.status.humanize %></span></td>
+        <td><%= formatted_datetime(opportunity.created_at) %></td>
+        <td class="actions">
+          <%= link_to "Edit", edit_admin_opportunity_path(opportunity) %>
+          <%= link_to "Delete", admin_opportunity_path(opportunity), data: { turbo_method: :delete, turbo_confirm: "Delete this opportunity?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

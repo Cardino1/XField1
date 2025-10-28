@@ -1,0 +1,20 @@
+<section class="mt-12">
+  <div class="container">
+    <h1 class="section-title">Stay in the loop</h1>
+    <p class="section-subtitle">Weekly digest with the most important stories, opportunities, and investor spotlights.</p>
+
+    <div class="card">
+      <%= form_with model: @subscription do |form| %>
+        <%= render "shared/form_errors", object: @subscription %>
+        <div class="form-group">
+          <%= form.label :email, "Email address" %>
+          <%= form.email_field :email %>
+        </div>
+        <div class="form-actions">
+          <%= link_to "Back", root_path, class: "btn-secondary" %>
+          <%= form.submit "Subscribe", class: "btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

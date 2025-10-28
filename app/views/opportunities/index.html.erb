@@ -1,0 +1,32 @@
+<section class="mt-12">
+  <div class="container">
+    <div class="flex justify-between items-center">
+      <div>
+        <h1 class="section-title">Opportunities</h1>
+        <p class="section-subtitle">Validated listings curated by the XField team.</p>
+      </div>
+      <%= link_to "Submit opportunity", new_opportunity_path, class: "btn-primary" %>
+    </div>
+
+    <div class="tab-bar">
+      <%= link_to "All", opportunities_path, class: "tab #{'active' unless @selected_filter.present?}" %>
+      <% @filters.each do |category| %>
+        <%= link_to category, opportunities_path(type: category), class: "tab #{'active' if @selected_filter == category}" %>
+      <% end %>
+    </div>
+
+    <div class="opportunity-grid mt-8">
+      <% @opportunities.each do |opportunity| %>
+        <div class="card">
+          <p class="badge"><%= opportunity.category %></p>
+          <h2 class="card-title"><%= link_to opportunity.title, opportunity_path(opportunity) %></h2>
+          <p class="card-description"><%= truncate(opportunity.description, length: 200) %></p>
+          <p class="card-meta">Submitted by <%= opportunity.full_name %>, <%= opportunity.organization %></p>
+        </div>
+      <% end %>
+      <% if @opportunities.empty? %>
+        <p class="text-gray-600">No opportunities available for this category yet.</p>
+      <% end %>
+    </div>
+  </div>
+</section>

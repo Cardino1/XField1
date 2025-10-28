@@ -1,0 +1,27 @@
+<div class="flex justify-between items-center">
+  <div>
+    <h1 class="section-title">Subscribers</h1>
+    <p class="section-subtitle">Manage the XField mailing list.</p>
+  </div>
+</div>
+
+<table class="table mt-8">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Joined</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @subscriptions.each do |subscription| %>
+      <tr>
+        <td><%= subscription.email %></td>
+        <td><%= formatted_datetime(subscription.created_at) %></td>
+        <td class="actions">
+          <%= link_to "Delete", admin_subscription_path(subscription), data: { turbo_method: :delete, turbo_confirm: "Remove this subscriber?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

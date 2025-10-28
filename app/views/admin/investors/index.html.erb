@@ -1,0 +1,32 @@
+<div class="flex justify-between items-center">
+  <div>
+    <h1 class="section-title">Investors</h1>
+    <p class="section-subtitle">Review venture capital partner submissions.</p>
+  </div>
+</div>
+
+<table class="table mt-8">
+  <thead>
+    <tr>
+      <th>Firm</th>
+      <th>Contact</th>
+      <th>Email</th>
+      <th>Focus</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @investors.each do |investor| %>
+      <tr>
+        <td><%= investor.firm_name %></td>
+        <td><%= investor.contact_name %></td>
+        <td><%= mail_to investor.email %></td>
+        <td><%= investor.investment_focus %></td>
+        <td class="actions">
+          <%= link_to "View", investors_path(anchor: "investor-#{investor.id}") %>
+          <%= link_to "Delete", admin_investor_path(investor), data: { turbo_method: :delete, turbo_confirm: "Remove this investor profile?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,29 @@
+<div class="flex justify-between items-center">
+  <div>
+    <h1 class="section-title"><%= @opportunity.title %></h1>
+    <p class="section-subtitle">
+      <span class="status-badge <%= @opportunity.status %>"><%= @opportunity.status.humanize %></span>
+      · <%= @opportunity.category %>
+    </p>
+  </div>
+  <div class="actions">
+    <%= link_to "Edit", edit_admin_opportunity_path(@opportunity), class: "primary" %>
+    <%= link_to "Delete", admin_opportunity_path(@opportunity), data: { turbo_method: :delete, turbo_confirm: "Delete this opportunity?" } %>
+  </div>
+</div>
+
+<div class="card mt-6">
+  <p class="card-meta">Submitted by <%= @opportunity.full_name %> · <%= @opportunity.organization %></p>
+  <div class="mt-4">
+    <%= simple_format(@opportunity.description) %>
+  </div>
+  <% if @opportunity.link.present? %>
+    <div class="mt-6">
+      <%= link_to @opportunity.link, @opportunity.link, class: "card-link", target: "_blank", rel: "noopener" %>
+    </div>
+  <% end %>
+  <div class="mt-6 actions">
+    <%= button_to "Approve", approve_admin_opportunity_path(@opportunity), method: :patch, class: "primary" unless @opportunity.approved? %>
+    <%= button_to "Reject", reject_admin_opportunity_path(@opportunity), method: :patch unless @opportunity.rejected? %>
+  </div>
+</div>

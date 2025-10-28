@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>XField Admin</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body class="font-sans bg-slate-50 text-slate-900">
+    <div class="admin-layout">
+      <aside class="admin-sidebar">
+        <div class="flex items-center space-x-2 mb-6">
+          <span class="inline-flex items-center justify-center w-10 h-10 bg-black text-white rounded-full text-lg font-bold">XF</span>
+          <div>
+            <p class="font-semibold">XField</p>
+            <p class="text-xs text-gray-500">Admin Console</p>
+          </div>
+        </div>
+        <nav class="space-y-2">
+          <%= link_to "Dashboard", admin_root_path, class: "admin-nav-link #{'active' if current_page?(admin_root_path)}" %>
+          <%= link_to "Articles", admin_articles_path, class: "admin-nav-link #{'active' if current_page?(admin_articles_path)}" %>
+          <%= link_to "Opportunities", admin_opportunities_path, class: "admin-nav-link #{'active' if current_page?(admin_opportunities_path)}" %>
+          <%= link_to "Investors", admin_investors_path, class: "admin-nav-link #{'active' if current_page?(admin_investors_path)}" %>
+          <%= link_to "Subscribers", admin_subscriptions_path, class: "admin-nav-link #{'active' if current_page?(admin_subscriptions_path)}" %>
+        </nav>
+        <div class="mt-auto pt-8 text-xs text-gray-400">Signed in as Admin</div>
+      </aside>
+      <section class="admin-content">
+        <% if notice %>
+          <div class="alert-success"><%= notice %></div>
+        <% end %>
+        <% if alert %>
+          <div class="alert-danger"><%= alert %></div>
+        <% end %>
+        <%= yield %>
+      </section>
+    </div>
+  </body>
+</html>

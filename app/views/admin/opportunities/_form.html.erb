@@ -1,0 +1,35 @@
+<%= form_with model: [:admin, @opportunity] do |form| %>
+  <%= render "shared/form_errors", object: @opportunity %>
+  <div class="form-group">
+    <%= form.label :category, "Type" %>
+    <%= form.select :category, Opportunity::CATEGORIES %>
+  </div>
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div class="form-group">
+    <%= form.label :full_name %>
+    <%= form.text_field :full_name %>
+  </div>
+  <div class="form-group">
+    <%= form.label :organization %>
+    <%= form.text_field :organization %>
+  </div>
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+  <div class="form-group">
+    <%= form.label :link %>
+    <%= form.url_field :link %>
+  </div>
+  <div class="form-group">
+    <%= form.label :status %>
+    <%= form.select :status, Opportunity.statuses.keys.map { |status| [status.humanize, status] } %>
+  </div>
+  <div class="form-actions">
+    <%= link_to "Cancel", admin_opportunities_path, class: "btn-secondary" %>
+    <%= form.submit class: "btn-primary" %>
+  </div>
+<% end %>
