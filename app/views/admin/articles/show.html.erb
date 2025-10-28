@@ -1,0 +1,17 @@
+<div class="flex justify-between items-center">
+  <div>
+    <h1 class="section-title"><%= @article.title %></h1>
+    <p class="section-subtitle">Status: <span class="status-badge <%= @article.status %>"><%= @article.status.humanize %></span></p>
+  </div>
+  <div class="actions">
+    <%= link_to "Edit", edit_admin_article_path(@article), class: "primary" %>
+    <%= link_to "Delete", admin_article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Delete this article?" } %>
+  </div>
+</div>
+
+<div class="card mt-6">
+  <p class="card-meta">Published: <%= formatted_datetime(@article.published_at) || "Draft" %></p>
+  <div class="mt-4 leading-relaxed">
+    <%= simple_format(@article.body) %>
+  </div>
+</div>

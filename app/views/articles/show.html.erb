@@ -1,0 +1,18 @@
+<section class="mt-12">
+  <div class="container">
+    <%= link_to "← Back to news", articles_path, class: "card-link" %>
+    <article class="card mt-6">
+      <p class="badge"><%= formatted_datetime(@article.published_at) || "Draft" %></p>
+      <h1 class="hero-title" style="font-size: 2.75rem;"><%= @article.title %></h1>
+      <p class="card-meta">By <%= @article.author.presence || "XField Team" %></p>
+      <% if @article.cover_image_url.present? %>
+        <div class="mt-6">
+          <img src="<%= @article.cover_image_url %>" alt="<%= @article.title %> cover" style="width: 100%; border-radius: 1.25rem;" />
+        </div>
+      <% end %>
+      <div class="mt-6 leading-relaxed">
+        <%= simple_format(@article.body) %>
+      </div>
+    </article>
+  </div>
+</section>

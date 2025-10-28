@@ -1,0 +1,62 @@
+<div class="flex justify-between items-center">
+  <div>
+    <h1 class="section-title">Admin dashboard</h1>
+    <p class="section-subtitle">Monitor submissions and publish new content.</p>
+  </div>
+  <%= link_to "New article", new_admin_article_path, class: "btn-primary" %>
+</div>
+
+<div class="grid gap-6 mt-8" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+  <div class="card">
+    <p class="card-eyebrow">Pending reviews</p>
+    <h2 class="card-title"><%= @pending_opportunities.count %> opportunities</h2>
+    <p class="card-description">Opportunities awaiting approval.</p>
+    <%= link_to "Review opportunities", admin_opportunities_path, class: "card-link" %>
+  </div>
+  <div class="card">
+    <p class="card-eyebrow">Latest articles</p>
+    <h2 class="card-title">Recent drafts</h2>
+    <ul class="list-none space-y-2">
+      <% @recent_articles.each do |article| %>
+        <li><%= link_to article.title, admin_article_path(article) %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="card">
+    <p class="card-eyebrow">Subscribers</p>
+    <h2 class="card-title"><%= @subscriptions_count %> members</h2>
+    <p class="card-description">People receiving weekly updates.</p>
+  </div>
+</div>
+
+<section class="mt-12">
+  <h2 class="section-title">Pending opportunities</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Submitted</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pending_opportunities.each do |opportunity| %>
+        <tr>
+          <td><%= link_to opportunity.title, admin_opportunity_path(opportunity) %></td>
+          <td><span class="status-badge pending"><%= opportunity.category %></span></td>
+          <td><%= formatted_datetime(opportunity.created_at) %></td>
+          <td class="actions">
+            <%= button_to "Approve", approve_admin_opportunity_path(opportunity), method: :patch, class: "primary" %>
+            <%= button_to "Reject", reject_admin_opportunity_path(opportunity), method: :patch %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @pending_opportunities.empty? %>
+        <tr>
+          <td colspan="4">No pending opportunities 🎉</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

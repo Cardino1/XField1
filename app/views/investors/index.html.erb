@@ -1,0 +1,36 @@
+<section class="mt-12">
+  <div class="container">
+    <div class="flex justify-between items-center">
+      <div>
+        <h1 class="section-title">Investor Partners</h1>
+        <p class="section-subtitle">Venture capital firms aligned with XField's mission.</p>
+      </div>
+      <%= link_to "Create your VC page", new_investor_path, class: "btn-primary" %>
+    </div>
+
+    <div class="opportunity-grid mt-8">
+      <% @investors.each do |investor| %>
+        <div class="investor-card" id="investor-<%= investor.id %>">
+          <div class="flex items-center space-x-3">
+            <span class="badge"><%= investor.firm_name.first %></span>
+            <div>
+              <h2 class="card-title"><%= investor.firm_name %></h2>
+              <p class="text-sm text-gray-600">Looking for: <%= investor.request_for_startups %></p>
+            </div>
+          </div>
+          <p class="card-description"><strong>Values:</strong> <%= investor.values %></p>
+          <p class="card-description"><strong>Focus:</strong> <%= investor.investment_focus %></p>
+          <p class="card-description"><strong>Portfolio highlights:</strong> <%= investor.portfolio_highlights.presence || "Not provided" %></p>
+          <% if investor.website.present? %>
+            <div>
+              <%= link_to "Visit website", investor.website, class: "card-link", target: "_blank", rel: "noopener" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <% if @investors.empty? %>
+        <p class="text-gray-600">No investor profiles yet. Be the first to add yours!</p>
+      <% end %>
+    </div>
+  </div>
+</section>

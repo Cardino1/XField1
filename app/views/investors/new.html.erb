@@ -1,0 +1,48 @@
+<section class="mt-12">
+  <div class="container">
+    <h1 class="section-title">Create a page for your venture capital firm</h1>
+    <p class="section-subtitle">Tell founders about your values, investment thesis, portfolio, and current requests for startups.</p>
+
+    <div class="card">
+      <%= form_with model: @investor do |form| %>
+        <%= render "shared/form_errors", object: @investor %>
+        <div class="form-group">
+          <%= form.label :firm_name, "Firm name" %>
+          <%= form.text_field :firm_name %>
+        </div>
+        <div class="form-group">
+          <%= form.label :contact_name, "Primary contact" %>
+          <%= form.text_field :contact_name %>
+        </div>
+        <div class="form-group">
+          <%= form.label :email, "Contact email" %>
+          <%= form.email_field :email %>
+        </div>
+        <div class="form-group">
+          <%= form.label :website, "Website" %>
+          <%= form.url_field :website %>
+        </div>
+        <div class="form-group">
+          <%= form.label :values, "Your values" %>
+          <%= form.text_area :values %>
+        </div>
+        <div class="form-group">
+          <%= form.label :investment_focus, "What you're looking for" %>
+          <%= form.text_area :investment_focus %>
+        </div>
+        <div class="form-group">
+          <%= form.label :portfolio_highlights, "Companies you have funded" %>
+          <%= form.text_area :portfolio_highlights %>
+        </div>
+        <div class="form-group">
+          <%= form.label :request_for_startups, "Request for startups" %>
+          <%= form.text_area :request_for_startups %>
+        </div>
+        <div class="form-actions">
+          <%= link_to "Cancel", investors_path, class: "btn-secondary" %>
+          <%= form.submit "Submit", class: "btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

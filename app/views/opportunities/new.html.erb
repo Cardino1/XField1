@@ -1,0 +1,40 @@
+<section class="mt-12">
+  <div class="container">
+    <h1 class="section-title">Share an opportunity</h1>
+    <p class="section-subtitle">Publish jobs, research collaborations, open-source initiatives, or co-founder calls.</p>
+
+    <div class="card">
+      <%= form_with model: @opportunity do |form| %>
+        <%= render "shared/form_errors", object: @opportunity %>
+        <div class="form-group">
+          <%= form.label :category, "Type" %>
+          <%= form.select :category, Opportunity::CATEGORIES, prompt: "Select opportunity type" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :title %>
+          <%= form.text_field :title %>
+        </div>
+        <div class="form-group">
+          <%= form.label :full_name, "Your full name" %>
+          <%= form.text_field :full_name %>
+        </div>
+        <div class="form-group">
+          <%= form.label :organization, "Organization" %>
+          <%= form.text_field :organization, placeholder: "University or Company" %>
+        </div>
+        <div class="form-group">
+          <%= form.label :description %>
+          <%= form.text_area :description %>
+        </div>
+        <div class="form-group">
+          <%= form.label :link, "External link (optional)" %>
+          <%= form.url_field :link %>
+        </div>
+        <div class="form-actions">
+          <%= link_to "Cancel", opportunities_path, class: "btn-secondary" %>
+          <%= form.submit "Submit", class: "btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

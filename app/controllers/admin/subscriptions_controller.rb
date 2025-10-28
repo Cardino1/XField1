@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+module Admin
+  class SubscriptionsController < BaseController
+    def index
+      @subscriptions = Subscription.order(created_at: :desc)
+    end
+
+    def destroy
+      subscription = Subscription.find(params[:id])
+      subscription.destroy
+      redirect_to admin_subscriptions_path, notice: "Subscription removed."
+    end
+  end
+end

@@ -1,0 +1,20 @@
+<section class="mt-12">
+  <div class="container">
+    <h1 class="section-title">XField Newsroom</h1>
+    <p class="section-subtitle">Insights, interviews, and product deep dives from our editorial team.</p>
+
+    <div class="opportunity-grid mt-8">
+      <% @articles.each do |article| %>
+        <div class="card">
+          <p class="card-eyebrow"><%= formatted_datetime(article.published_at) || "Draft" %></p>
+          <h2 class="card-title"><%= link_to article.title, article_path(article) %></h2>
+          <p class="card-description"><%= article.excerpt.presence || truncate(strip_tags(article.body), length: 180) %></p>
+          <p class="card-meta">By <%= article.author.presence || "XField Team" %></p>
+        </div>
+      <% end %>
+      <% if @articles.empty? %>
+        <p class="text-gray-600">No articles published yet. Check back soon!</p>
+      <% end %>
+    </div>
+  </div>
+</section>
