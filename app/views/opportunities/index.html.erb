@@ -1,0 +1,26 @@
+<section class="section">
+  <div class="section-header">
+    <h1 class="section-title">Opportunities</h1>
+    <%= link_to "Share an opportunity", new_opportunity_path, class: "nav-link" %>
+  </div>
+  <div class="badge-group" style="margin-bottom: 1.5rem;">
+    <% @types.each do |type| %>
+      <%= link_to opportunities_path(type: type), class: "badge" do %>
+        <%= type.humanize %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="grid cards-3">
+    <% @opportunities.each do |opportunity| %>
+      <div class="card">
+        <span class="label"><%= opportunity.opportunity_type.humanize %></span>
+        <h3><%= opportunity.title %></h3>
+        <p><%= opportunity.description %></p>
+        <small style="color: var(--muted);">By <%= opportunity.full_name %> · <%= opportunity.organization %></small>
+        <% if opportunity.link.present? %>
+          <%= link_to "Open link", opportunity.link, class: "nav-link", target: "_blank", rel: "noopener" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>

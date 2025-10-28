@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>XField Admin</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <div class="admin-layout">
+      <aside class="admin-sidebar">
+        <h2>Admin</h2>
+        <ul>
+          <li><%= link_to "Dashboard", admin_root_path, class: (current_page?(admin_root_path) ? "active" : nil) %></li>
+          <li><%= link_to "Articles", admin_articles_path, class: (controller_name == "articles" ? "active" : nil) %></li>
+          <li><%= link_to "Opportunities", admin_opportunities_path, class: (controller_name == "opportunities" ? "active" : nil) %></li>
+          <li><%= link_to "Investors", admin_investors_path, class: (controller_name == "investors" ? "active" : nil) %></li>
+          <li><%= link_to "Subscribers", admin_users_path, class: (controller_name == "users" ? "active" : nil) %></li>
+        </ul>
+      </aside>
+      <main class="admin-main">
+        <% if flash[:success] %>
+          <div class="notice"><%= flash[:success] %></div>
+        <% end %>
+        <% if flash[:error] %>
+          <div class="alert"><%= flash[:error] %></div>
+        <% end %>
+        <%= yield %>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<h1 class="section-title">Subscribers</h1>
+<table class="table" style="margin-top: 1.5rem;">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Joined</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.created_at&.strftime("%b %d, %Y") %></td>
+        <td class="table-actions">
+          <%= button_to "Remove", admin_user_path(user), method: :delete, data: { confirm: "Remove this subscriber?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

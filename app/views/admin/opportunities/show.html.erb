@@ -1,0 +1,20 @@
+<div class="section-header">
+  <h1 class="section-title"><%= @opportunity.title %></h1>
+  <div class="table-actions">
+    <% unless @opportunity.approved? %>
+      <%= button_to "Approve", approve_admin_opportunity_path(@opportunity), method: :patch %>
+      <%= button_to "Reject", reject_admin_opportunity_path(@opportunity), method: :patch, data: { confirm: "Reject this opportunity?" } %>
+    <% end %>
+    <%= link_to "Edit", edit_admin_opportunity_path(@opportunity) %>
+  </div>
+</div>
+<p style="color: var(--muted);">Submitted by <%= @opportunity.full_name %> · <%= @opportunity.organization %></p>
+<div class="card" style="gap: 1rem;">
+  <strong>Type</strong>
+  <p><%= @opportunity.opportunity_type.humanize %></p>
+  <strong>Description</strong>
+  <p style="color: #e2e8f0; white-space: pre-line;"><%= @opportunity.description %></p>
+  <% if @opportunity.link.present? %>
+    <%= link_to "Open link", @opportunity.link, class: "nav-link", target: "_blank", rel: "noopener" %>
+  <% end %>
+</div>

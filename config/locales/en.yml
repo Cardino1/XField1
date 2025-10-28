@@ -1,0 +1,13 @@
+en:
+  hello: "Hello world"
+  layouts:
+    application:
+      title: "XField"
+  home:
+    hero_title: "Discover today's top innovators"
+    hero_subtitle: "Curated news, vetted opportunities, and visionary investors shaping technology."
+    explore: "Explore"
+    opportunities: "Opportunities"
+    investors: "Investors"
+    news: "News"
+    get_updates: "Get Updates"

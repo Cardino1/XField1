@@ -1,0 +1,27 @@
+<%= form_with model: [:admin, @article], local: true do |form| %>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div>
+    <%= form.label :excerpt %>
+    <%= form.text_area :excerpt %>
+  </div>
+  <div>
+    <%= form.label :body %>
+    <%= form.text_area :body, rows: 12 %>
+  </div>
+  <div>
+    <%= form.label :author %>
+    <%= form.text_field :author %>
+  </div>
+  <div>
+    <%= form.label :published_at %>
+    <%= form.date_field :published_at %>
+  </div>
+  <div>
+    <%= form.label :featured %>
+    <%= form.check_box :featured %>
+  </div>
+  <%= form.button %>
+<% end %>

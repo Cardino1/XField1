@@ -1,0 +1,88 @@
+<section class="hero">
+  <div>
+    <div class="tagline">Curated daily</div>
+    <h1><%= t("home.hero_title") %></h1>
+    <p><%= t("home.hero_subtitle") %></p>
+    <div class="badge-group" style="margin-top: 1.5rem;">
+      <span class="badge">Latest News</span>
+      <span class="badge">Opportunities</span>
+      <span class="badge">Investors</span>
+      <span class="badge">Founder Community</span>
+    </div>
+  </div>
+  <div class="form-card">
+    <h3>Join the XField signal</h3>
+    <p style="color: var(--muted);">One crisp briefing with tech breakthroughs and vetted opportunities.</p>
+    <%= form_with model: @subscription, url: subscriptions_path, local: true do |form| %>
+      <div>
+        <%= form.label :email %>
+        <%= form.email_field :email, placeholder: "you@startup.com" %>
+        <% if @subscription.errors[:email].present? %>
+          <small style="color: #fca5a5;"> <%= @subscription.errors[:email].to_sentence %></small>
+        <% end %>
+      </div>
+      <%= form.button "Get Updates" %>
+    <% end %>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Latest Articles</h2>
+    <%= link_to "View all", articles_path, class: "nav-link" %>
+  </div>
+  <div class="grid cards-3">
+    <% @articles.each do |article| %>
+      <article class="card">
+        <span class="label">Newsroom</span>
+        <h3><%= link_to article.title, article_path(article) %></h3>
+        <p><%= article.excerpt %></p>
+        <small style="color: var(--muted);">By <%= article.author %> · <%= format_date(article.published_at) %></small>
+      </article>
+    <% end %>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Opportunities</h2>
+    <%= link_to "Submit an opportunity", new_opportunity_path, class: "nav-link" %>
+  </div>
+  <div class="grid cards-4">
+    <% @opportunities.each do |opportunity| %>
+      <div class="card">
+        <span class="label"><%= opportunity.opportunity_type.humanize %></span>
+        <h3><%= opportunity.title %></h3>
+        <p><%= opportunity.description %></p>
+        <small style="color: var(--muted);">By <%= opportunity.full_name %>, <%= opportunity.organization %></small>
+        <% if opportunity.link.present? %>
+          <%= link_to "Learn more", opportunity.link, class: "nav-link", target: "_blank", rel: "noopener" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">Investors</h2>
+    <%= link_to "Become a partner", new_investor_path, class: "nav-link" %>
+  </div>
+  <div class="grid cards-3">
+    <% @investors.each do |investor| %>
+      <div class="card">
+        <span class="label">VC Partner</span>
+        <h3><%= investor.name %></h3>
+        <p><strong>Values:</strong> <%= investor.values %></p>
+        <p><strong>Focus:</strong> <%= investor.focus %></p>
+        <% if investor.portfolio_highlights.present? %>
+          <p><strong>Portfolio:</strong> <%= investor.portfolio_highlights %></p>
+        <% end %>
+        <p><strong>Request for startups:</strong> <%= investor.request_for_startups %></p>
+        <% if investor.website.present? %>
+          <%= link_to "Visit website", investor.website, class: "nav-link", target: "_blank", rel: "noopener" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>

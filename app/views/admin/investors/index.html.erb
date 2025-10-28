@@ -1,0 +1,28 @@
+<div class="section-header">
+  <h1 class="section-title">Investors</h1>
+  <%= link_to "New", new_admin_investor_path, class: "nav-link" %>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Focus</th>
+      <th>Featured</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @investors.each do |investor| %>
+      <tr>
+        <td><%= investor.name %></td>
+        <td><%= truncate(investor.focus, length: 60) %></td>
+        <td><%= investor.featured? ? "Yes" : "No" %></td>
+        <td class="table-actions">
+          <%= link_to "View", admin_investor_path(investor) %>
+          <%= link_to "Edit", edit_admin_investor_path(investor) %>
+          <%= button_to "Delete", admin_investor_path(investor), method: :delete, data: { confirm: "Delete this investor?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

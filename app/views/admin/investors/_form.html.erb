@@ -1,0 +1,31 @@
+<%= form_with model: [:admin, @investor], local: true do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.label :values %>
+    <%= form.text_area :values, rows: 4 %>
+  </div>
+  <div>
+    <%= form.label :focus %>
+    <%= form.text_area :focus, rows: 4 %>
+  </div>
+  <div>
+    <%= form.label :portfolio_highlights %>
+    <%= form.text_area :portfolio_highlights, rows: 3 %>
+  </div>
+  <div>
+    <%= form.label :request_for_startups %>
+    <%= form.text_area :request_for_startups, rows: 4 %>
+  </div>
+  <div>
+    <%= form.label :website %>
+    <%= form.url_field :website %>
+  </div>
+  <div>
+    <%= form.label :featured %>
+    <%= form.check_box :featured %>
+  </div>
+  <%= form.button %>
+<% end %>

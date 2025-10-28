@@ -1,0 +1,16 @@
+<section class="section" style="max-width: 720px; margin: 0 auto;">
+  <div class="form-card">
+    <h2 class="section-title" style="margin: 0;">Stay in the loop</h2>
+    <p style="color: var(--muted);">Leave your email to receive curated insights and new opportunities each week.</p>
+    <%= form_with model: @subscription, url: subscriptions_path, local: true do |form| %>
+      <div>
+        <%= form.label :email %>
+        <%= form.email_field :email, placeholder: "you@startup.com" %>
+        <% if @subscription.errors[:email].present? %>
+          <small style="color: #fca5a5;"> <%= @subscription.errors[:email].to_sentence %></small>
+        <% end %>
+      </div>
+      <%= form.button "Subscribe" %>
+    <% end %>
+  </div>
+</section>

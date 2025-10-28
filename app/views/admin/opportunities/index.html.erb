@@ -1,0 +1,30 @@
+<div class="section-header">
+  <h1 class="section-title">Opportunities</h1>
+  <%= link_to "New", new_admin_opportunity_path, class: "nav-link" %>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Type</th>
+      <th>Submitted by</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @opportunities.each do |opportunity| %>
+      <tr>
+        <td><%= opportunity.title %></td>
+        <td><%= opportunity.opportunity_type.humanize %></td>
+        <td><%= opportunity.full_name %></td>
+        <td><%= opportunity.approved? ? "Published" : "Pending" %></td>
+        <td class="table-actions">
+          <%= link_to "View", admin_opportunity_path(opportunity) %>
+          <%= link_to "Edit", edit_admin_opportunity_path(opportunity) %>
+          <%= button_to "Delete", admin_opportunity_path(opportunity), method: :delete, data: { confirm: "Delete this opportunity?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

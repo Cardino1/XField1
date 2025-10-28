@@ -1,0 +1,35 @@
+<section class="section">
+  <div class="section-header">
+    <h1 class="section-title">Our Investor Partners</h1>
+    <%= link_to "Create your VC page", new_investor_path, class: "nav-link" %>
+  </div>
+  <p style="color: var(--muted); max-width: 720px;">
+    XField surfaces venture firms that actively partner with ambitious founders.
+    Share your thesis to join the curated roster.
+  </p>
+  <div class="grid cards-3" style="margin-top: 2rem;">
+    <% @investors.each do |investor| %>
+      <div class="card">
+        <span class="label">Partner</span>
+        <h3><%= investor.name %></h3>
+        <p><strong>Values:</strong> <%= investor.values %></p>
+        <p><strong>Focus:</strong> <%= investor.focus %></p>
+        <% if investor.portfolio_highlights.present? %>
+          <p><strong>Portfolio:</strong> <%= investor.portfolio_highlights %></p>
+        <% end %>
+        <p><strong>Request for startups:</strong> <%= investor.request_for_startups %></p>
+        <% if investor.website.present? %>
+          <%= link_to "Visit website", investor.website, class: "nav-link", target: "_blank", rel: "noopener" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<section class="section" style="max-width: 900px; margin: 0 auto;">
+  <div class="form-card">
+    <h2 class="section-title" style="margin: 0;">Create a page for your VC firm</h2>
+    <p style="color: var(--muted);">Share your values, recent wins, and the type of founders you're scouting.</p>
+    <%= render "form", investor: @investor %>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+<%= form_with model: investor, local: true do |form| %>
+  <div>
+    <%= form.label :name, "Firm name" %>
+    <%= form.text_field :name, placeholder: "Venture Capital Firm" %>
+  </div>
+  <div>
+    <%= form.label :values, "Your values" %>
+    <%= form.text_area :values, placeholder: "What principles guide your investments?" %>
+  </div>
+  <div>
+    <%= form.label :focus, "What you're looking for" %>
+    <%= form.text_area :focus, placeholder: "Preferred stages, sectors, check sizes" %>
+  </div>
+  <div>
+    <%= form.label :portfolio_highlights, "Companies you have funded" %>
+    <%= form.text_area :portfolio_highlights, placeholder: "Notable portfolio companies" %>
+  </div>
+  <div>
+    <%= form.label :request_for_startups, "Request for startups" %>
+    <%= form.text_area :request_for_startups, placeholder: "Tell founders what gets you excited" %>
+  </div>
+  <div>
+    <%= form.label :website, "Website" %>
+    <%= form.url_field :website, placeholder: "https://" %>
+  </div>
+  <%= form.button "Submit profile" %>
+<% end %>

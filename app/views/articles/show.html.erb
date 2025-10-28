@@ -1,0 +1,10 @@
+<section class="section" style="max-width: 860px; margin: 0 auto;">
+  <article class="card" style="gap: 1.5rem;">
+    <span class="label">Newsroom</span>
+    <h1 style="margin: 0; font-size: 2rem;"><%= @article.title %></h1>
+    <p style="color: var(--muted);">By <%= @article.author %> · <%= format_date(@article.published_at) %></p>
+    <div style="color: #dbeafe; line-height: 1.7; white-space: pre-line;">
+      <%= @article.body %>
+    </div>
+  </article>
+</section>

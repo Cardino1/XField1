@@ -1,0 +1,16 @@
+<section class="section">
+  <div class="section-header">
+    <h1 class="section-title">All News</h1>
+    <%= link_to "Submit Opportunity", new_opportunity_path, class: "nav-link" %>
+  </div>
+  <div class="grid cards-3">
+    <% @articles.each do |article| %>
+      <article class="card">
+        <span class="label">Newsroom</span>
+        <h3><%= link_to article.title, article_path(article) %></h3>
+        <p><%= article.excerpt %></p>
+        <small style="color: var(--muted);">By <%= article.author %> · <%= format_date(article.published_at) %></small>
+      </article>
+    <% end %>
+  </div>
+</section>

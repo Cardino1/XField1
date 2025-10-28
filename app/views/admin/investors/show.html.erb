@@ -1,0 +1,18 @@
+<div class="section-header">
+  <h1 class="section-title"><%= @investor.name %></h1>
+  <div class="table-actions">
+    <%= link_to "Edit", edit_admin_investor_path(@investor) %>
+    <%= button_to "Delete", admin_investor_path(@investor), method: :delete, data: { confirm: "Delete this investor?" } %>
+  </div>
+</div>
+<div class="card" style="gap: 1rem;">
+  <p><strong>Values:</strong> <%= @investor.values %></p>
+  <p><strong>Focus:</strong> <%= @investor.focus %></p>
+  <% if @investor.portfolio_highlights.present? %>
+    <p><strong>Portfolio:</strong> <%= @investor.portfolio_highlights %></p>
+  <% end %>
+  <p><strong>Request for startups:</strong> <%= @investor.request_for_startups %></p>
+  <% if @investor.website.present? %>
+    <%= link_to @investor.website, @investor.website, class: "nav-link", target: "_blank", rel: "noopener" %>
+  <% end %>
+</div>

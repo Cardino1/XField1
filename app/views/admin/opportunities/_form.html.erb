@@ -1,0 +1,31 @@
+<%= form_with model: [:admin, @opportunity], local: true do |form| %>
+  <div>
+    <%= form.label :opportunity_type, "Type" %>
+    <%= form.select :opportunity_type, Opportunity.opportunity_types.keys.map { |type| [type.humanize, type] } %>
+  </div>
+  <div>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+  <div>
+    <%= form.label :full_name %>
+    <%= form.text_field :full_name %>
+  </div>
+  <div>
+    <%= form.label :organization %>
+    <%= form.text_field :organization %>
+  </div>
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: 8 %>
+  </div>
+  <div>
+    <%= form.label :link %>
+    <%= form.url_field :link %>
+  </div>
+  <div>
+    <%= form.label :approved %>
+    <%= form.check_box :approved %>
+  </div>
+  <%= form.button %>
+<% end %>

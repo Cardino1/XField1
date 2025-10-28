@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>XField</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <div style="background: rgba(59,130,246,0.35); padding: 0.5rem; border-radius: 0.75rem;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 12L10 18L20 6" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+          <span>XField</span>
+        </div>
+        <div class="nav-links">
+          <%= nav_link_to t("home.explore"), root_path %>
+          <%= nav_link_to t("home.opportunities"), opportunities_path %>
+          <%= nav_link_to t("home.investors"), investors_path %>
+          <%= nav_link_to t("home.news"), articles_path %>
+        </div>
+        <%= link_to t("home.get_updates"), get_updates_path, class: "cta-button" %>
+      </nav>
+    </header>
+
+    <% if notice %>
+      <div class="notice"><%= notice %></div>
+    <% end %>
+
+    <% if alert %>
+      <div class="alert"><%= alert %></div>
+    <% end %>
+
+    <%= yield %>
+
+    <footer class="footer">
+      XField © <%= Time.current.year %>. Curated by the XField editorial team.
+    </footer>
+  </body>
+</html>
